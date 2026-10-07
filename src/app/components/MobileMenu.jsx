@@ -51,7 +51,7 @@ const MobileMenu = ({ data }) => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="absolute right-0 top-12 z-[100] w-72 rounded-2xl border border-base-300 bg-base-100 p-3 shadow-2xl">
+        <div className="absolute right-0 top-12 z-100 w-72 rounded-2xl border border-base-300 bg-base-100 p-3 shadow-2xl">
           <div className="grid gap-2">
             {data.map((items) => (
               <Link
@@ -65,9 +65,34 @@ const MobileMenu = ({ data }) => {
                 </span>
 
                 <span>{items.nameBn}</span>
+
               </Link>
+              
             ))}
           </div>
+
+
+       <div className="flex mt-10 shrink-0 items-center gap-1.5 sm:gap-2">
+
+            {/* Sign In */}
+            <button
+              type="button"
+              className="btn btn-ghost btn-sm rounded-xl px-3 sm:inline-flex"
+            >
+              সাইন ইন
+            </button>
+
+            {/* Sign Up */}
+            <button
+              type="button"
+              className="btn btn-success btn-sm  rounded-xl px-3 text-xs text-white shadow-sm transition-all hover:scale-[1.02] hover:shadow-md sm:px-4 sm:text-sm"
+            >
+              সাইন আপ
+            </button>
+
+          </div>
+
+          
         </div>
       )}
     </div>
