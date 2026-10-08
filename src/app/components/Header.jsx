@@ -9,9 +9,7 @@ const Header = async () => {
     dateStyle: "full",
   });
 
-  const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/categories",
-  );
+const res = await fetch(`${process.env.BACKEND_URL}/api/bazardor/categories`);
 
   const categories = await res.json();
 

@@ -1,10 +1,7 @@
 import Link from "next/link";
 
 const Navlinks = async () => {
-  const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/categories",
-  );
-
+ const res = await fetch(`${process.env.BACKEND_URL}/api/bazardor/categories`);
   const data = await res.json();
 
   console.log(data);
