@@ -35,9 +35,9 @@ const AllProducts = async () => {
             </h1>
 
             <p className="mt-1 text-sm text-base-content/60">
-             মোট <span className="rounded-full px-3 py-1 text-sm font-semibold text-[#1A9951]">
+             মোট<span className="rounded-full px-3 py-1 text-sm font-semibold text-[#1A9951]">
               {toBanglaNumber(data.length)}টি পণ্য
-            </span> দেখানো হচ্ছে
+            </span>দেখানো হচ্ছে
             </p>
           </div>
 

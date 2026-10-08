@@ -73,29 +73,9 @@ const AllProductCard = ({ product }) => {
           {/* Change */}
           {product.change && (
             <div
-              className={`rounded-xl px-3 py-2 text-right ${
-                isUp
-                  ? "bg-[#D03739]/10"
-                  : isDown
-                    ? "bg-green-50"
-                    : "bg-base-200"
-              }`}
+              className={`rounded-xl px-3 py-2 text-right`}
             >
-              <p
-                className={`text-xs font-medium ${
-                  isUp
-                    ? "text-[#D03739]/80"
-                    : isDown
-                      ? "text-green-600"
-                      : "text-base-content/50"
-                }`}
-              >
-                {isUp
-                  ? "দাম বেড়েছে"
-                  : isDown
-                    ? "দাম কমেছে"
-                    : "দাম অপরিবর্তিত"}
-              </p>
+     
 
               <p
                 className={`mt-0.5 font-bold ${
