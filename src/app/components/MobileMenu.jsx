@@ -55,7 +55,7 @@ const MobileMenu = ({ data }) => {
           <div className="grid gap-2">
             {data.map((items) => (
               <Link
-                href={items.slug}
+                href={`/category/${items.slug}`}
                 key={items.id}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-3 rounded-xl border border-base-200 px-4 py-3 font-semibold transition-all hover:border-[#05893E] hover:bg-[#05893E] hover:text-white"

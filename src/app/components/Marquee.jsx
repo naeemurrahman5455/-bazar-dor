@@ -26,12 +26,14 @@ const Marquee = async () => {
   const data = await res.json();
 
   return (
+
+
     <div className="w-full overflow-hidden bg-base-100">
       <MarqueeText direction="right" duration="10">
         <div className="flex items-center gap-3 py-3">
           {[...data, ...data].map((Mitems, index) => (
             <Link
-              href={Mitems.slug}
+             href={`/product/${Mitems.id}`}
               key={`${Mitems.id}-${index}`}
               className="group shrink-0"
             >
@@ -77,6 +79,8 @@ const Marquee = async () => {
         </div>
       </MarqueeText>
     </div>
+
+
   );
 };
 
