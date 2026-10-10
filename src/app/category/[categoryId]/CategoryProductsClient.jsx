@@ -53,26 +53,50 @@ const CategoryProductsClient = ({ products }) => {
 
 
 
-                  {/* Sort Control */}
-          <div className="flex justify-end bg-base-100 mb-8 p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04)]  rounded-2xl border border-base-200 items-center gap-3">
-            <label
-              htmlFor="category-sort"
-              className="shrink-0 text-sm font-medium text-base-content/70"
-            >
-              সাজান:
-            </label>
+{/* Modern Sort Control */}
+<div className="mb-8 flex flex-col gap-3 rounded-2xl border border-base-200 bg-base-100 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-end sm:gap-4 sm:p-5">
+  {/* Label */}
+  <label
+    htmlFor="category-sort"
+    className="flex shrink-0 items-center gap-2 text-sm font-semibold text-base-content/80"
+  >
+    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-success/10 text-success">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="19"
+        height="19"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M4 7h16" />
+        <path d="M7 12h10" />
+        <path d="M10 17h4" />
+      </svg>
+    </span>
 
-            <select
-              id="category-sort"
-              value={sortBy}
-              onChange={(event) => setSortBy(event.target.value)}
-              className="select select-bordered w-full rounded-xl sm:w-56"
-            >
-              <option value="default">ডিফল্ট</option>
-              <option value="price-asc">দাম: কম থেকে বেশি</option>
-              <option value="price-desc">দাম: বেশি থেকে কম</option>
-            </select>
-          </div>
+    <span>দাম সাজান</span>
+  </label>
+
+  {/* Select */}
+  <div className="relative w-full sm:w-60">
+    <select
+      id="category-sort"
+      value={sortBy}
+      onChange={(event) => setSortBy(event.target.value)}
+      className="select pt-4 select-bordered h-12 w-full rounded-xl border-base-300 bg-base-100 pr-10 text-sm font-medium text-base-content shadow-sm outline-none transition-all duration-200 hover:border-success/50 focus:border-success focus:outline-none focus:ring-2 focus:ring-success/15"
+    >
+      <option value="default">ডিফল্ট</option>
+      <option value="price-asc">দাম: কম থেকে বেশি</option>
+      <option value="price-desc">দাম: বেশি থেকে কম</option>
+    </select>
+  </div>
+</div>
+
 
         {/* Products Grid */}
               <p className="mt-1 text-sm text-base-content/60">

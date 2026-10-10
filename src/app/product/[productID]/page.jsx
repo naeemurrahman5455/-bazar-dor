@@ -1,6 +1,25 @@
 
+
+
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
+
 const ProductDetailsPage = async ({ params }) => {
   const { productID } = await params;
+
+  // Login Protection
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect(
+      `/sign-in?callbackURL=${encodeURIComponent(
+        `/product/${productID}`,
+      )}`,
+    );
+  }
 
   const res = await fetch(
     `${process.env.BACKEND_URL}/api/bazardor/products/${productID}`,
@@ -31,24 +50,34 @@ const ProductDetailsPage = async ({ params }) => {
 
   const getAverage = (min, max) => (min + max) / 2;
 
-  const allPrices = markets.flatMap((market) => [market.min, market.max]);
+  const allPrices = markets.flatMap((market) => [
+    market.min,
+    market.max,
+  ]);
 
   const minMarket = markets.reduce(
-    (lowest, market) => (market.min < lowest.min ? market : lowest),
+    (lowest, market) =>
+      market.min < lowest.min ? market : lowest,
     markets[0],
   );
 
   const maxMarket = markets.reduce(
-    (highest, market) => (market.max > highest.max ? market : highest),
+    (highest, market) =>
+      market.max > highest.max ? market : highest,
     markets[0],
   );
 
-  const minPrice = allPrices.length ? Math.min(...allPrices) : null;
+  const minPrice = allPrices.length
+    ? Math.min(...allPrices)
+    : null;
 
-  const maxPrice = allPrices.length ? Math.max(...allPrices) : null;
+  const maxPrice = allPrices.length
+    ? Math.max(...allPrices)
+    : null;
 
   const avgPrice = allPrices.length
-    ? allPrices.reduce((sum, price) => sum + price, 0) / allPrices.length
+    ? allPrices.reduce((sum, price) => sum + price, 0) /
+      allPrices.length
     : null;
 
   return (
@@ -67,7 +96,8 @@ const ProductDetailsPage = async ({ params }) => {
               </h1>
 
               <p className="mt-2 text-sm text-base-content/60">
-                {unitLabels[product.unit] || product.unit} · {product.nameBn}
+                {unitLabels[product.unit] || product.unit} ·{" "}
+                {product.nameBn}
               </p>
 
               <p
@@ -92,14 +122,17 @@ const ProductDetailsPage = async ({ params }) => {
             </div>
 
             <div className="mt-4 flex flex-col items-center gap-1 sm:mt-0">
-              <span className="text-sm text-base-content/60">আজকের দাম</span>
+              <span className="text-sm text-base-content/60">
+                আজকের দাম
+              </span>
 
               <span className="text-2xl font-extrabold text-primary">
                 ৳{formatPrice(product.today)}
               </span>
 
               <p className="text-sm text-base-content/60">
-                টাকা / {product.unit === "kg" ? "কেজি" : product.unit}
+                টাকা /{" "}
+                {product.unit === "kg" ? "কেজি" : product.unit}
               </p>
 
               <span
@@ -128,6 +161,7 @@ const ProductDetailsPage = async ({ params }) => {
             <h2 className="text-2xl font-bold text-base-content">
               দামের সারসংক্ষেপ
             </h2>
+
             <p className="mt-1 text-sm text-base-content/60">
               সার্বিক বাজারদরের সংক্ষিপ্ত বিবরণ
             </p>
@@ -140,13 +174,16 @@ const ProductDetailsPage = async ({ params }) => {
                 <h3 className="font-semibold text-base-content/70">
                   সর্বনিম্ন দাম
                 </h3>
+
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-success/10 text-xl text-success">
                   ↓
                 </span>
               </div>
 
               <p className="mt-5 text-3xl font-extrabold text-success">
-                {minPrice !== null ? `৳${formatPrice(minPrice)}` : "দাম নেই"}
+                {minPrice !== null
+                  ? `৳${formatPrice(minPrice)}`
+                  : "দাম নেই"}
               </p>
 
               <p className="mt-2 text-sm text-base-content/50">
@@ -160,13 +197,16 @@ const ProductDetailsPage = async ({ params }) => {
                 <h3 className="font-semibold text-base-content/70">
                   সর্বাধিক দাম
                 </h3>
+
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-error/10 text-xl text-error">
                   ↑
                 </span>
               </div>
 
               <p className="mt-5 text-3xl font-extrabold text-error">
-                {maxPrice !== null ? `৳${formatPrice(maxPrice)}` : "দাম নেই"}
+                {maxPrice !== null
+                  ? `৳${formatPrice(maxPrice)}`
+                  : "দাম নেই"}
               </p>
 
               <p className="mt-2 text-sm text-base-content/50">
@@ -177,14 +217,19 @@ const ProductDetailsPage = async ({ params }) => {
             {/* Average Price */}
             <div className="rounded-2xl border border-primary/20 bg-base-100 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
               <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-base-content/70">গড় দাম</h3>
+                <h3 className="font-semibold text-base-content/70">
+                  গড় দাম
+                </h3>
+
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-xl text-primary">
                   ≈
                 </span>
               </div>
 
               <p className="mt-5 text-3xl font-extrabold text-primary">
-                {avgPrice !== null ? `৳${formatPrice(avgPrice)}` : "দাম নেই"}
+                {avgPrice !== null
+                  ? `৳${formatPrice(avgPrice)}`
+                  : "দাম নেই"}
               </p>
 
               <p className="mt-2 text-sm text-base-content/50">
@@ -202,8 +247,8 @@ const ProductDetailsPage = async ({ params }) => {
             </h2>
 
             <p className="text-sm text-base-content/60">
-              বাজার, ক্যাটাগরি এবং সর্বনিম্ন, সর্বোচ্চ ও গড় দামের বিস্তারিত
-              তালিকা।
+              বাজার, ক্যাটাগরি এবং সর্বনিম্ন, সর্বোচ্চ ও গড় দামের
+              বিস্তারিত তালিকা।
             </p>
           </div>
 
@@ -222,7 +267,10 @@ const ProductDetailsPage = async ({ params }) => {
 
                 <tbody>
                   {markets.map((market, index) => {
-                    const marketAverage = getAverage(market.min, market.max);
+                    const marketAverage = getAverage(
+                      market.min,
+                      market.max,
+                    );
 
                     return (
                       <tr key={`${market.market}-${index}`}>

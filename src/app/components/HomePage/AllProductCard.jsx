@@ -32,7 +32,7 @@ const AllProductCard = ({ product }) => {
 
   return (
     <Link
-      href={`/product/${product.slug}`}
+      href={`/product/${product.id}`}
       className="group block h-full"
     >
       <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-base-200 bg-base-100 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
