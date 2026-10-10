@@ -98,3 +98,9 @@ const AllProductCard = ({ product }) => {
 };
 
 export default AllProductCard;
+
+
+
+
+
+
